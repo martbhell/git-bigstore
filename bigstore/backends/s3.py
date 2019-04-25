@@ -20,10 +20,10 @@ except ImportError:
     pass
 
 class S3Backend(object):
-    def __init__(self, bucket_name, key=None, secret=None, profile_name=None):
+    def __init__(self, bucket_name, key=None, secret=None, profile_name=None, endpoint_url=None):
         self.bucket = bucket_name
         self.session = boto3.Session(aws_access_key_id=key, aws_secret_access_key=secret, profile_name=profile_name)
-        self.s3_client = self.session.client('s3')
+        self.s3_client = self.session.client('s3', endpoint_url=endpoint_url)
 
     @property
     def name(self):
